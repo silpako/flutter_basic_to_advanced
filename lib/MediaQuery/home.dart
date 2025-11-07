@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_frameworks/MediaQuery/bigscreen.dart';
-import 'package:flutter_frameworks/MediaQuery/mobile.dart';
+import 'package:flutter_basic_to_advanced/MediaQuery/bigscreen.dart';
+import 'package:flutter_basic_to_advanced/MediaQuery/mobile.dart';
+
 
 void main() {
   runApp(MaterialApp(

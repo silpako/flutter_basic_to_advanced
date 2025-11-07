@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_frameworks/Conformpassword/splash.dart';
+import 'package:flutter_basic_to_advanced/Conformpassword/splash.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+
 
 void main() {
   runApp(MaterialApp(

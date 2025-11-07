@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_frameworks/Conformpassword/login.dart';
+import 'package:flutter_basic_to_advanced/Conformpassword/login.dart';
 
 class  Reg_Stateful extends StatefulWidget{
   @override

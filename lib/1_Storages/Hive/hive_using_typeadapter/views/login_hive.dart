@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_frameworks/1_Storages/Hive/hive_using_typeadapter/database/hivedb.dart';
-import 'package:flutter_frameworks/1_Storages/Hive/hive_using_typeadapter/model/users.dart';
-import 'package:flutter_frameworks/1_Storages/Hive/hive_using_typeadapter/views/hive_home.dart';
-import 'package:flutter_frameworks/1_Storages/Hive/hive_using_typeadapter/views/reg_hive.dart';
+import 'package:flutter_basic_to_advanced/1_Storages/Hive/hive_using_typeadapter/database/hivedb.dart';
+import 'package:flutter_basic_to_advanced/1_Storages/Hive/hive_using_typeadapter/model/users.dart';
+import 'package:flutter_basic_to_advanced/1_Storages/Hive/hive_using_typeadapter/views/hive_home.dart';
+import 'package:flutter_basic_to_advanced/1_Storages/Hive/hive_using_typeadapter/views/reg_hive.dart';
+
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -12,9 +13,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox<Users>('User'); //
   Hive.registerAdapter(UsersAdapter());
-  runApp(GetMaterialApp(
-    home: Hive_Login(),
-  ));
+  runApp(GetMaterialApp(home: Hive_Login()));
 }
 
 class Hive_Login extends StatelessWidget {
@@ -24,9 +23,7 @@ class Hive_Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Registration Page"),
-      ),
+      appBar: AppBar(title: const Text("Registration Page")),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -34,25 +31,23 @@ class Hive_Login extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("Login Page"),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               TextField(
                 controller: email_controller,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "User Name"),
+                  border: OutlineInputBorder(),
+                  hintText: "User Name",
+                ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               TextField(
                 controller: pwd_controller,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "Password"),
+                  border: OutlineInputBorder(),
+                  hintText: "Password",
+                ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               MaterialButton(
                 onPressed: () async {
                   final users = await HiveDB.instance.getUsers();
@@ -63,10 +58,11 @@ class Hive_Login extends StatelessWidget {
                 child: const Text('Login Here'),
               ),
               TextButton(
-                  onPressed: () {
-                    Get.to(Hive_Reg());
-                  },
-                  child: Text("Not a user Register Here...!"))
+                onPressed: () {
+                  Get.to(Hive_Reg());
+                },
+                child: Text("Not a user Register Here...!"),
+              ),
             ],
           ),
         ),
@@ -90,12 +86,18 @@ class Hive_Login extends StatelessWidget {
         Get.offAll(() => HiveHome(email: email));
         Get.snackbar("Success", "Login Success", backgroundColor: Colors.green);
       } else {
-        Get.snackbar("Error", "Login Failed,No user Exists",
-            backgroundColor: Colors.red);
+        Get.snackbar(
+          "Error",
+          "Login Failed,No user Exists",
+          backgroundColor: Colors.red,
+        );
       }
     } else {
-      Get.snackbar("Error", "Fields must not be empty",
-          backgroundColor: Colors.red);
+      Get.snackbar(
+        "Error",
+        "Fields must not be empty",
+        backgroundColor: Colors.red,
+      );
     }
   }
 }

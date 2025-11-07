@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_frameworks/StaggeredGridView/stag_grid_list.dart';
+import 'package:flutter_basic_to_advanced/StaggeredGridView/stag_grid_list.dart';
+
 
 void main() {
   runApp(MaterialApp(

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
 void main() async {
   await Hive.initFlutter();
   await Hive.openBox('todo_box');
-  runApp(MaterialApp(
-    home: HiveTodo(),
-  ));
+  runApp(MaterialApp(home: HiveTodo()));
 }
 
 class HiveTodo extends StatefulWidget {
@@ -32,15 +31,14 @@ class _HiveTodoState extends State<HiveTodo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Task'),
-      ),
+      appBar: AppBar(title: const Text('My Task')),
       body: task.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : GridView.builder(
               itemCount: task.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2),
+                crossAxisCount: 2,
+              ),
               itemBuilder: (context, index) {
                 int date = task[index]['time'];
 
@@ -54,31 +52,37 @@ class _HiveTodoState extends State<HiveTodo> {
                         '${task[index]['taskname']}',
                         style: GoogleFonts.habibi(fontSize: 20),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      const SizedBox(height: 10),
+                      Text(
+                        task[index]['taskdesc'],
+                        overflow: TextOverflow.visible,
+                        maxLines: 4,
+                        style: GoogleFonts.habibi(fontSize: 15),
                       ),
-                      Text(task[index]['taskdesc'],
-                          overflow: TextOverflow.visible,
-                          maxLines: 4,
-                          style: GoogleFonts.habibi(fontSize: 15)),
-                      Text('${DateTime.fromMillisecondsSinceEpoch(date)}',
-                          style: GoogleFonts.habibi(fontSize: 15)),
+                      Text(
+                        '${DateTime.fromMillisecondsSinceEpoch(date)}',
+                        style: GoogleFonts.habibi(fontSize: 15),
+                      ),
                       Expanded(
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
                             IconButton(
-                                onPressed: () =>
-                                    showAlertbox(task[index]['id']),
-                                icon: const Icon(Icons.edit)),
+                              onPressed: () => showAlertbox(task[index]['id']),
+                              icon: const Icon(Icons.edit),
+                            ),
                             IconButton(
-                                onPressed: () => deleteTask(task[index]['id']),
-                                icon: const Icon(Icons.delete)),
-                          ]))
+                              onPressed: () => deleteTask(task[index]['id']),
+                              icon: const Icon(Icons.delete),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 );
-              }),
+              },
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showAlertbox(null),
         child: Icon(Icons.task),
@@ -98,66 +102,72 @@ class _HiveTodoState extends State<HiveTodo> {
       descr_cntrl.text = existing_task['taskdesc'];
     }
     showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            backgroundColor: Colors.greenAccent,
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), hintText: "Title"),
-                  controller: title_cntrl,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: Colors.greenAccent,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "Title",
                 ),
-                const SizedBox(
-                  height: 10,
+                controller: title_cntrl,
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                maxLines: 3,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "Content",
                 ),
-                TextField(
-                  maxLines: 3,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), hintText: "Content"),
-                  controller: descr_cntrl,
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    if (title_cntrl.text != "" && descr_cntrl.text != "") {
-                      createTask({
-                        'tname': title_cntrl.text.trim(),
-                        'tcontent': descr_cntrl.text.trim(),
-                        'time': DateTime.now().millisecondsSinceEpoch
-                      });
-                    }
-                    title_cntrl.text = "";
-                    descr_cntrl.text = "";
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Create Task')),
-              TextButton(
-                  onPressed: () {
-                    if (key != null) {
-                      updateTask(key, {
-                        'tname': title_cntrl.text.trim(),
-                        'tcontent': descr_cntrl.text.trim(),
-                        'time': DateTime.now().millisecondsSinceEpoch
-                      });
-                    }
-                    title_cntrl.text = "";
-                    descr_cntrl.text = "";
-                    Navigator.pop(context);
-                  },
-                  child: Text('Update Task')),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Cancel'))
+                controller: descr_cntrl,
+              ),
             ],
-          );
-        });
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                if (title_cntrl.text != "" && descr_cntrl.text != "") {
+                  createTask({
+                    'tname': title_cntrl.text.trim(),
+                    'tcontent': descr_cntrl.text.trim(),
+                    'time': DateTime.now().millisecondsSinceEpoch,
+                  });
+                }
+                title_cntrl.text = "";
+                descr_cntrl.text = "";
+                Navigator.pop(context);
+              },
+              child: const Text('Create Task'),
+            ),
+            TextButton(
+              onPressed: () {
+                if (key != null) {
+                  updateTask(key, {
+                    'tname': title_cntrl.text.trim(),
+                    'tcontent': descr_cntrl.text.trim(),
+                    'time': DateTime.now().millisecondsSinceEpoch,
+                  });
+                }
+                title_cntrl.text = "";
+                descr_cntrl.text = "";
+                Navigator.pop(context);
+              },
+              child: Text('Update Task'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> createTask(Map<String, dynamic> mytask) async {
@@ -177,7 +187,7 @@ class _HiveTodoState extends State<HiveTodo> {
         'id': key,
         'taskname': value['tname'],
         'taskdesc': value['tcontent'],
-        'time': value['time']
+        'time': value['time'],
       };
     }).toList();
 
@@ -195,7 +205,8 @@ class _HiveTodoState extends State<HiveTodo> {
   Future<void> deleteTask(int key) async {
     await my_box.delete(key);
     readTask_refreshUi();
-    ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text("Successfully Deleted")));
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text("Successfully Deleted")));
   }
 }

@@ -1,6 +1,6 @@
 // factory constructor - instance return
 //singleton class craeted by factory constructor ,it have only single instance
-import 'package:flutter_frameworks/1_Storages/Hive/hive_using_typeadapter/model/users.dart';
+import 'package:flutter_basic_to_advanced/1_Storages/Hive/hive_using_typeadapter/model/users.dart';
 import 'package:hive/hive.dart';
 
 class HiveDB {

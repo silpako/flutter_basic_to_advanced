@@ -1,6 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_frameworks/1_Storages/Hive/hive_using_typeadapter/model/users.dart';
+import 'package:flutter_basic_to_advanced/1_Storages/Hive/hive_using_typeadapter/model/users.dart';
 import 'package:get/get.dart';
 
 import '../database/hivedb.dart';
@@ -13,9 +13,7 @@ class Hive_Reg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Registration Page"),
-      ),
+      appBar: AppBar(title: const Text("Registration Page")),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -23,33 +21,31 @@ class Hive_Reg extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("Registration Page"),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               TextField(
                 controller: name_controller,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "Name"),
+                  border: OutlineInputBorder(),
+                  hintText: "Name",
+                ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               TextField(
                 controller: email_controller,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "User Name"),
+                  border: OutlineInputBorder(),
+                  hintText: "User Name",
+                ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               TextField(
                 controller: pwd_controller,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "Password"),
+                  border: OutlineInputBorder(),
+                  hintText: "Password",
+                ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 15),
               MaterialButton(
                 onPressed: () async {
                   final userList = await HiveDB.instance.getUsers();
@@ -61,7 +57,7 @@ class Hive_Reg extends StatelessWidget {
                 shape: const StadiumBorder(),
                 color: Colors.pink,
                 child: const Text('Register Here'),
-              )
+              ),
             ],
           ),
         ),

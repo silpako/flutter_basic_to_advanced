@@ -29,8 +29,7 @@ class HeightWidth extends StatelessWidget {
                 style: GoogleFonts.robotoSerif(),
               ),
               style: ElevatedButton.styleFrom(
-                primary: Colors.blue, // Background color
-                onPrimary: Colors.white, // Text color
+              
               ),
             ),
           ),

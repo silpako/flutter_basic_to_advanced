@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_frameworks/1_Storages/shared_preference/login_registration/login_shared.dart';
+import 'package:flutter_basic_to_advanced/1_Storages/shared_preference/login_registration/login_shared.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -16,9 +16,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Registration"),
-      ),
+      appBar: AppBar(title: const Text("Registration")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -28,7 +26,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: TextField(
                 controller: name,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "Name"),
+                  border: OutlineInputBorder(),
+                  hintText: "Name",
+                ),
               ),
             ),
             Padding(
@@ -36,7 +36,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: TextField(
                 controller: uname,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "UserName"),
+                  border: OutlineInputBorder(),
+                  hintText: "UserName",
+                ),
               ),
             ),
             Padding(
@@ -44,12 +46,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: TextField(
                 controller: pwd,
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "Password"),
+                  border: OutlineInputBorder(),
+                  hintText: "Password",
+                ),
               ),
             ),
             ElevatedButton(
-                onPressed: () => storedata(),
-                child: const Text("Register Here"))
+              onPressed: () => storedata(),
+              child: const Text("Register Here"),
+            ),
           ],
         ),
       ),
@@ -66,7 +71,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
     preferences.setString('uname', username);
     preferences.setString('pass', password);
 
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => Login2()));
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (context) => Login2()));
   }
 }

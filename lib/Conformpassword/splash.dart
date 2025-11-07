@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_frameworks/Conformpassword/login.dart';
+import 'package:flutter_basic_to_advanced/Conformpassword/login.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 void main() {
   runApp(MaterialApp(

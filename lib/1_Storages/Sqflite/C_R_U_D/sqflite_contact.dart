@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_frameworks/1_Storages/Sqflite/C_R_U_D/sql_function.dart';
+import 'package:flutter_basic_to_advanced/1_Storages/Sqflite/C_R_U_D/sql_function.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {

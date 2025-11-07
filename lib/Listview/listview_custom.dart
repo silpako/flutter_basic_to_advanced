@@ -1,36 +1,25 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MaterialApp(home: CustomListView()));
+void main() {
+  runApp(MaterialApp(
+    home: ListView_constum(),
+  ));
+}
 
-class CustomListView extends StatelessWidget {
-  const CustomListView({super.key});
-
+class ListView_constum extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("ListView.custom "),
-        centerTitle: true,
-        backgroundColor: Colors.pinkAccent,
+        title: Text("ListView Custom"),
       ),
       body: ListView.custom(
-        childrenDelegate: SliverChildListDelegate([
-          Container(
-            height: 80,
-            color: Colors.red,
-            child: Center(child: Text("Item 1")),
-          ),
-          Container(
-            height: 80,
-            color: Colors.green,
-            child: Center(child: Text("Item 2")),
-          ),
-          Container(
-            height: 80,
-            color: Colors.blue,
-            child: Center(child: Text("Item 3")),
-          ),
-        ]),
+        //childrenDelegate: SliverChildListDelegate([])
+        childrenDelegate: SliverChildBuilderDelegate(
+            (context, index) => Card(
+                  child: Icon(Icons.account_balance),
+                ),
+            childCount: 10),
       ),
     );
   }

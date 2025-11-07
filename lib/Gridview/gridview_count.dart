@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: GridView_extent(),
+    home: GridView_count(),
   ));
 }
 
-class GridView_extent extends StatelessWidget {
+class GridView_count extends StatelessWidget {
   var img = [
     "assets/images/Apple.png",
     "assets/images/Banana.png",
@@ -37,16 +37,16 @@ class GridView_extent extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(8.0),
-        child: GridView.extent(
-          maxCrossAxisExtent: 100,
+        child: GridView.count(
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          crossAxisCount: 2,
           children: List.generate(
               6,
               (index) => Container(
-                    height: 50,
-                    width: 100,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(
-                          Radius.circular(100),
+                          Radius.circular(50),
                         ),
                         color:
                             Colors.primaries[index % Colors.primaries.length]),
@@ -57,15 +57,19 @@ class GridView_extent extends StatelessWidget {
                         children: [
                           Image.asset(
                             img[index],
-                            height: 50,
-                            width: 50,
+                            height: 100,
+                            width: 100,
                           ),
-                          Expanded(
-                            child: Text(
-                              text[index],
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            text[index],
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 8,
                           ),
                           Text(cash[index]),
                         ],

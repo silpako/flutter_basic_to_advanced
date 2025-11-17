@@ -29,19 +29,23 @@ class Product_main_Grid extends StatelessWidget {
               (product) => InkWell(
                 onTap: () => Navigator.of(
                   context,
-                ).pushNamed("details", arguments: product["id"]),
+                ).pushNamed("details", arguments: product["id"]), // here is passing data
                 child: Card(
+                  color: Colors.lightGreenAccent,
                   // shape
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        // same size with images use box decoration
-                        height: 150,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(product["image"]),
+                      Center(
+                        child: Container(
+                          // same size with images use box decoration
+                          height: 150,
+                          width: 150,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(product["image"]),
+                            ),
                           ),
                         ),
                       ),

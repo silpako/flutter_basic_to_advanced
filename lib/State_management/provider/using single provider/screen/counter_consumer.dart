@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_to_advanced/State_management/using%20single%20provider/controller/counter_provider.dart';
+import 'package:flutter_basic_to_advanced/State_management/provider/using%20single%20provider/controller/counter_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -14,12 +14,8 @@ void main() {
 }
 
 class IncreCount extends StatelessWidget {
-  const IncreCount({super.key});
-
   @override
   Widget build(BuildContext context) {
-    var counterProvider = Provider.of<CounterProvider>(context);
-    // specify which provider is working on this screen
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple,
@@ -33,22 +29,29 @@ class IncreCount extends StatelessWidget {
               "Press Button to Increment value",
               style: TextStyle(fontSize: 15),
             ),
-            Text(
-              "Count : ${counterProvider.counter.count}",
-              style: const TextStyle(fontSize: 25),
+            Consumer<CounterProvider>(
+              builder:
+                  (
+                    BuildContext context,
+                    CounterProvider counterProvider,
+                    Widget? child,
+                  ) {
+                    return Text(
+                      "Count : ${counterProvider.counter.count}",
+                      style: const TextStyle(fontSize: 25),
+                    );
+                  },
             ),
-            // ElevatedButton(
-            //     onPressed: () {
-            //       counterProvider.increment();
-            //     },
-            //     child: const Text("increment"))
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-
               children: [
                 InkWell(
                   onTap: () {
-                    counterProvider.increment();
+                    Provider.of<CounterProvider>(
+                      context,
+                      listen: false,
+                    ).increment();
                   },
                   child: const CircleAvatar(
                     backgroundColor: Colors.green,
@@ -57,7 +60,10 @@ class IncreCount extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    counterProvider.decrement();
+                    Provider.of<CounterProvider>(
+                      context,
+                      listen: false,
+                    ).decrement();
                   },
                   child: const CircleAvatar(
                     backgroundColor: Colors.red,

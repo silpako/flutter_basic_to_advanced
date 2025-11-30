@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic_to_advanced/State_management/provider/multiprovider/model/counter.dart';
 
-import '../model/Counter.dart';
 
 class CounterProvider1 extends ChangeNotifier {
   final Counter1 _counter = Counter1(0);

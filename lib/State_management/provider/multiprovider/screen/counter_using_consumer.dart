@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_basic_to_advanced/State_management/multiprovider/controller/counter_provider.dart';
-import 'package:flutter_basic_to_advanced/State_management/multiprovider/controller/theme_provider.dart';
+import 'package:flutter_basic_to_advanced/State_management/provider/multiprovider/controller/counter_provider.dart';
+import 'package:flutter_basic_to_advanced/State_management/provider/multiprovider/controller/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
